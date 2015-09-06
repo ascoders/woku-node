@@ -1,0 +1,5 @@
+__inline('js/global.js')
+__inline('js/avalon_conf.js')
+__inline('js/namespace.js')
+__inline('js/init.js')
+__inline('js/router.js')

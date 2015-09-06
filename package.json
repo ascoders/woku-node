@@ -1,0 +1,70 @@
+{
+  "name": "woku",
+  "title": "woku",
+  "description": "woku with nodejs",
+  "version": "",
+  "main": "app.js",
+  "homepage": "http://wokugame.com",
+  "author": {
+    "name": "ascoders(翱翔大空) and other contributors",
+    "url": "http://home.cnblogs.com/u/rubylouvre/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avalon/avalon.git"
+  },
+  "keywords": [
+    "mvvm",
+    "javascript",
+    "browser",
+    "library"
+  ],
+  "bugs": {
+    "url": "https://github.com/avalon/avalon/issues"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/jquery/jquery/blob/master/LICENSE.txt"
+  }],
+  "dependencies": {
+    "co": "",
+    "koa": "",
+    "koa-bodyparser": "",
+    "koa-conditional-get": "",
+    "koa-etag": "",
+    "koa-generic-session": "",
+    "koa-redis": "",
+    "koa-router": "",
+    "koa-static": "",
+    "koa-static-cache": "",
+    "mongoose": "",
+    "log4js": "",
+    "thenify": "",
+    "thenify-all": "",
+    "phantom": "",
+    "node-schedule": "",
+    "redis": "",
+    "hiredis redis": ""
+  },
+  "devDependencies": {
+    "debug": "",
+    "del": "",
+    "grunt-contrib-watch": "",
+    "gulp": "",
+    "gulp-concat": "",
+    "gulp-htmlmin": "",
+    "gulp-imagemin": "",
+    "gulp-jshint": "",
+    "gulp-minify-css": "",
+    "gulp-rename": "",
+    "gulp-replace": "",
+    "gulp-sass": "",
+    "gulp-uglify": ""
+  },
+  "scripts": {
+    "build": "npm install && gulp"
+  },
+  "commitplease": {
+    "components": []
+  }
+}
