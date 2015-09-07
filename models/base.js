@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize')
 
-module.exports = new Sequelize('woku', 'root', '', {
+module.exports = new Sequelize('woku', 'root', 'aaaa', {
     host: 'localhost',
     dialect: 'mysql',
     pool: {

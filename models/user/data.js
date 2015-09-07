@@ -1,24 +1,23 @@
 var Sequelize = require('sequelize')
 var base = require('../base')
 
-console.log('初始化创建user表')
-
-exports = base.define('user', {
+var user = base.define('user', {
     id: {
         comment: '主键',
         type: Sequelize.INTEGER.UNSIGNED,
+        autoIncrement: true,
         primaryKey: true
     },
     nickname: {
         comment: '昵称 唯一索引',
         type: Sequelize.STRING(10),
-        unique: 'compositeIndex',
+        unique: true,
         allowNull: false
     },
     email: {
         comment: '电子邮箱 唯一索引',
         type: Sequelize.STRING(30),
-        unique: 'compositeIndex'
+        unique: true
     },
     password: {
         comment: '密码',
@@ -33,3 +32,7 @@ exports = base.define('user', {
         type: Sequelize.DECIMAL(10, 3)
     }
 })
+
+user.sync()
+
+module.exports = user

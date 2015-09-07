@@ -14,6 +14,9 @@
 // npm install mysql
 // npm install sequelize
 
+// atom插件
+// autocomplete-modules
+
 // 升级fis3
 // npm install -g fis3
 

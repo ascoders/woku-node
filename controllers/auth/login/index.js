@@ -1,6 +1,6 @@
 var user = require('../../../models/user')
 
 exports.test = function* () {
-    user.add()
-    this.body = 'asda'
+    var content = yield user.add()
+    this.body = content
 }
