@@ -18,7 +18,7 @@ require(['mmState'], function () {
 
             // 删除所有模态框
             $('.ui.modals').modal('hide')
-            $('.ui.modals').remove()
+                //$('.ui.modals').remove()
         }
     })
 
@@ -84,7 +84,10 @@ require(['mmState'], function () {
             }]
         }, { // 分类
             module: 'app/base/category',
-            url: '/category/{name}'
+            url: '/category/{id}'
+        }, { // 文章
+            module: 'app/base/article',
+            url: '/article/{id}'
         }]
     })
 

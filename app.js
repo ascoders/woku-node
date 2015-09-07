@@ -64,10 +64,6 @@ var etag = require('koa-etag')
 app.use(conditional())
 app.use(etag())
 
-// 获取post传参（req.body）
-var bodyParser = require('koa-bodyparser')
-app.use(bodyParser())
-
 // 路由
 var router = require('./config/router.js')
 app.use(router.routes())
