@@ -18,7 +18,7 @@ app.use(function* (next) {
     yield next
 
     var ms = new Date() - start
-    console.log(ms + 'ms')
+    console.log('url:', this.url, '\ttime:', ms + 'ms')
 });
 
 // 计划任务
@@ -43,17 +43,11 @@ app.use(session({
 }))
 */
 
-// 开放静态文件目录
-var staticServe = require('koa-static')
-app.use(staticServe(path.join(__dirname, conf.staticDir.path)), {
-    maxage: conf.staticDir.maxAge
-})
-
 // 设置静态资源缓存
 // 处理public目录下的js, css, jpg, png , ttf, woff， eot, otf, svg文件
 var staticCache = require('koa-static-cache')
-
 app.use(staticCache(path.join(__dirname, conf.staticDir.path), {
+    prefix: '/static',
     maxAge: conf.staticDir.maxAge
 }))
 
@@ -71,7 +65,7 @@ app.use(router.allowedMethods())
 
 // 监听错误
 app.on("error", function (err, ctx) {
-    log.error('server error', err, ctx)
+    console.log('server error', err, ctx)
 })
 
 // 捕获未捕获的错误

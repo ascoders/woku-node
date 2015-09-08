@@ -5,7 +5,6 @@
 // npm install koa
 // npm install koa-router
 // npm install koa-redis
-// npm install koa-static
 // npm install koa-static-cache
 // npm install koa-conditional-get
 // npm install koa-etag

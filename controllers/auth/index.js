@@ -5,7 +5,8 @@ var router = require('koa-router')({
     prefix: '/auth'
 })
 
-router.get('/login', login.test)
+router.get('/login', login.index)
+
 router.get('/register', register.test)
 
 module.exports = router

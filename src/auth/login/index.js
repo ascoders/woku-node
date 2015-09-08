@@ -42,7 +42,7 @@ ctrl.$onRendered = function () {
         },
         onSuccess: function () {
             wk.get({
-                url: '/api/users/authentication',
+                url: '/api/auth/login',
                 data: {
                     account: form.find('[name=account]').val(),
                     password: form.find('[name=password]').val()
