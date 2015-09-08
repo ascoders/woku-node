@@ -1,8 +1,9 @@
+var conf = require('../config/config.js')
 var Sequelize = require('sequelize')
 
-module.exports = new Sequelize('woku', 'root', 'aaaa', {
-    host: 'localhost',
-    dialect: 'mysql',
+module.exports = new Sequelize(conf.db.name, conf.db.user, conf.db.password, {
+    host: conf.db.host,
+    dialect: conf.db.dialect,
     pool: {
         max: 10,
         min: 1,

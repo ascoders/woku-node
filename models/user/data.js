@@ -30,6 +30,32 @@ var user = base.define('user', {
     money: {
         comment: '账户余额',
         type: Sequelize.DECIMAL(10, 3)
+    },
+    login_count: {
+        comment: '登录次数',
+        type: 'MEDIUMINT'
+    },
+    error_chance: {
+        comment: '账号输错机会次数',
+        type: 'TINYINT'
+    },
+    stop_time: {
+        comment: '账号封停截至时间',
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
+    },
+    type: {
+        comment: '账号类型',
+        type: Sequelize.ENUM('admin', 'member', 'vip'),
+        defaultValue: 'member'
+    },
+    upload_size: {
+        comment: '今日上传大小 kb',
+        type: 'MEDIUMINT'
+    },
+    token: {
+        comment: '密钥',
+        type: Sequelize.CHAR(32)
     }
 })
 
