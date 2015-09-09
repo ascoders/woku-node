@@ -4,9 +4,15 @@ var data = require('./data')
 exports.add = function (info) {
     return new Promise(function (resolve) {
         data.create(info).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
-            resolve(err)
+            resolve({
+                ok: false,
+                data: err
+            })
         })
     })
 }
@@ -17,9 +23,15 @@ exports.delete = function (where) {
         data.destroy({
             where: where
         }).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
-            resolve(err)
+            resolve({
+                ok: false,
+                data: err
+            })
         })
     })
 }
@@ -30,9 +42,15 @@ exports.update = function (data, where) {
         data.update(data, {
             where: where
         }).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
-            resolve(err)
+            resolve({
+                ok: false,
+                data: err
+            })
         })
     })
 }
@@ -44,9 +62,15 @@ exports.findOne = function (where, attributes) {
             where: where,
             attributes: attributes
         }).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
-            resolve(err)
+            resolve({
+                ok: false,
+                data: err
+            })
         })
     })
 }
@@ -58,9 +82,15 @@ exports.findAll = function (where, attributes) {
             where: where,
             attributes: attributes
         }).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
-            resolve(err)
+            resolve({
+                ok: false,
+                data: err
+            })
         })
     })
 }
@@ -72,7 +102,10 @@ exports.findAndCountAll = function (where, attributes) {
             where: where,
             attributes: attributes
         }).then(function (result) {
-            resolve(result)
+            resolve({
+                ok: true,
+                data: result
+            })
         }).catch(function (err) {
             resolve(err)
         })

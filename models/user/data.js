@@ -12,12 +12,20 @@ var user = base.define('user', {
         comment: '昵称 唯一索引',
         type: Sequelize.STRING(10),
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: [2, 10],
+            msg: '昵称长度为2-10'
+        }
     },
     email: {
         comment: '电子邮箱 唯一索引',
         type: Sequelize.STRING(30),
-        unique: true
+        unique: true,
+        validate: {
+            isEmail: true,
+            msg: '邮箱格式错误'
+        }
     },
     password: {
         comment: '密码',
@@ -57,6 +65,8 @@ var user = base.define('user', {
         comment: '密钥',
         type: Sequelize.CHAR(32)
     }
+}, {
+    underscored: true
 })
 
 user.sync()
