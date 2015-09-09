@@ -62,10 +62,17 @@ exports.findOne = function (where, attributes) {
             where: where,
             attributes: attributes
         }).then(function (result) {
-            resolve({
-                ok: true,
-                data: result
-            })
+            if (result) {
+                resolve({
+                    ok: true,
+                    data: result
+                })
+            } else {
+                resolve({
+                    ok: false,
+                    data: '用户不存在'
+                })
+            }
         }).catch(function (err) {
             resolve({
                 ok: false,
@@ -82,10 +89,17 @@ exports.findAll = function (where, attributes) {
             where: where,
             attributes: attributes
         }).then(function (result) {
-            resolve({
-                ok: true,
-                data: result
-            })
+            if (result) {
+                resolve({
+                    ok: true,
+                    data: result
+                })
+            } else {
+                resolve({
+                    ok: false,
+                    data: '用户不存在'
+                })
+            }
         }).catch(function (err) {
             resolve({
                 ok: false,
