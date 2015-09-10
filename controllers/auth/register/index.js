@@ -6,11 +6,32 @@ var controller = {}
 // 创建用户
 controller.index = function* () {
     var form = {
-        nickname: this.query.nickname,
-        password: this.query.password,
-        email: this.query.email
-    }
-
+            nickname: this.query.nickname,
+            password: this.query.password,
+            email: this.query.email
+        }
+        /*
+            var form = request.get(this.query, {
+                nickname: {
+                    isNull: {
+                        args: false,
+                        msg: '帐号不能为空'
+                    }
+                },
+                password: {
+                    isNull: {
+                        args: false,
+                        msg: '密码不能为空'
+                    }
+                },
+                email: {
+                    isNull: {
+                        args: false,
+                        msg: '邮箱不能为空'
+                    }
+                }
+            })
+        */
     if (validator.isNull(form.nickname)) {
         return this.body = {
             ok: false,
