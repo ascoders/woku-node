@@ -14,8 +14,10 @@ var user = base.define('user', {
         unique: true,
         allowNull: false,
         validate: {
-            len: [2, 10],
-            msg: '昵称长度为2-10'
+            len: {
+                args: [2, 10],
+                msg: '昵称长度为2-10'
+            },
         }
     },
     email: {
@@ -23,8 +25,9 @@ var user = base.define('user', {
         type: Sequelize.STRING(30),
         unique: true,
         validate: {
-            isEmail: true,
-            msg: '邮箱格式错误'
+            isEmail: {
+                msg: '邮箱格式错误'
+            }
         }
     },
     password: {
@@ -33,7 +36,13 @@ var user = base.define('user', {
     },
     portrait: {
         comment: '头像地址',
-        type: Sequelize.CHAR(30)
+        type: Sequelize.CHAR(30),
+        validate: {
+            len: {
+                args: [1, 30],
+                msg: '头像地址长度为1-30'
+            }
+        }
     },
     money: {
         comment: '账户余额',
@@ -63,7 +72,13 @@ var user = base.define('user', {
     },
     token: {
         comment: '密钥',
-        type: Sequelize.CHAR(32)
+        type: Sequelize.CHAR(32),
+        validate: {
+            len: {
+                args: 32,
+                msg: '密钥长度为32'
+            }
+        }
     }
 }, {
     underscored: true
