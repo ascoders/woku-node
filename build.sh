@@ -19,6 +19,7 @@ then
   npm install node-schedule
   npm install mysql
   npm install sequelize
+  npm install validator
 fi
 
 if [[ $1 == "run" ]]

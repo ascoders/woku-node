@@ -12,6 +12,7 @@
 // npm install node-schedule
 // npm install mysql
 // npm install sequelize
+// npm install validator
 
 // atom插件
 // autocomplete-modules

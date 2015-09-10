@@ -46,15 +46,18 @@ var user = base.define('user', {
     },
     money: {
         comment: '账户余额',
-        type: Sequelize.DECIMAL(10, 3)
+        type: Sequelize.DECIMAL(10, 3),
+        defaultValue: 0
     },
     login_count: {
         comment: '登录次数',
-        type: 'MEDIUMINT'
+        type: 'MEDIUMINT',
+        defaultValue: 1
     },
     error_chance: {
         comment: '账号输错机会次数',
-        type: 'TINYINT'
+        type: 'TINYINT',
+        defaultValue: 0
     },
     stop_time: {
         comment: '账号封停截至时间',
@@ -68,7 +71,8 @@ var user = base.define('user', {
     },
     upload_size: {
         comment: '今日上传大小 kb',
-        type: 'MEDIUMINT'
+        type: 'MEDIUMINT',
+        defaultValue: 0
     },
     token: {
         comment: '密钥',
