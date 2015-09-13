@@ -50,12 +50,15 @@ require.config({
         // jquery插件
         'timeago': 'plugin/jquery/timeago',
         'selection': 'plugin/jquery/selection',
-        'typetype': 'plugin/jquery/jquery.typetype', // 模拟输入
+        'typetype': 'plugin/jquery/typetype', // 模拟输入
         'taboverride': 'plugin/jquery/taboverride', // tab键变为缩进
         'contextMenu': 'plugin/query/jquery.contextMenu', // 右键菜单
 
         // markdown解析
-        'marked': 'plugin/marked/marked',
+        'marked': 'plugin/marked',
+
+        // 验证
+        'validator': 'plugin/validator',
 
         // extend插件
         'editor': 'plugin_extend/editor/editor', // 编辑器

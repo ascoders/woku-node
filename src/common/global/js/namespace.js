@@ -1,27 +1,32 @@
 // namespace.js
 var wk = wk || {}
 
+// 设置用户信息
+wk.setUser = function (val) {
+    val.portrait = wk.userImage(val.portrait)
+    global.my.info = val
+    global.my.isLogin = true
+
+    // 信息获取完毕
+    global.$myDeferred.resolve()
+}
+
 // 提示框
-wk.notice = function (opts) {
-    if (wk._noticeTimeout) {
-        clearTimeout(wk._noticeTimeout)
-    }
+wk.notice = function ($dom, opts) {
+    opts = $.extend({
+        position: 'top',
+        message: 'tooltip',
+    }, opts)
 
-    $('#j-logo')
-        .popup(opts)
-        .popup('show')
+    $dom
+        .attr('data-toggle', 'tooltip')
+        .attr('data-placement', opts.position)
+        .attr('title', opts.message)
 
-    wk._noticeTimeout = setTimeout(function () {
-        clearTimeout(wk._noticeTimeout)
-        wk._noticeTimeout = null
-        $('#j-logo')
-            .popup('hide')
-
-        setTimeout(function () {
-            $('#j-logo')
-                .popup('destroy')
-        }, 200)
-    }, 2000)
+    $dom.tooltip({
+        trigger: 'manual'
+    })
+    $dom.tooltip('show')
 }
 
 // 选择框
@@ -29,9 +34,9 @@ wk.confirm = function (content, callback) {
 
 }
 
-//调整用户头像图片路径
+// 调整用户头像图片路径
 wk.userImage = function (str) {
-    if (str != undefined && str != "") {
+    if (str !== undefined && str !== "") {
         if (!isNaN(str)) {
             return "/static/common/global/image/user/" + str + ".jpg";
         }
@@ -255,6 +260,7 @@ wk.timediff = function (element, options, callback) {
     Run();
 }
 
+// 跳转到上次页面
 wk.jumpLastLocation = function () {
     if (avalon.router.getLastPath().indexOf('auth') > -1) {
         // auth页直接跳转至首页
@@ -263,4 +269,43 @@ wk.jumpLastLocation = function () {
         // 跳回上个页面
         avalon.router.navigate(avalon.router.getLastPath())
     }
+}
+
+// 表单验证
+// 基于bootstrap4.0样式
+// 验证组件请自行require
+wk.validate = function ($dom, opts) {
+    var validate = {
+        ok: true
+    }
+
+    // 设置表单error方法
+    validate.error = function (name, msg) {
+        var $input = $dom.find('input[name=' + name + ']')
+        $input.addClass('form-control-error')
+        $input.parents('.form-group:first').addClass('has-error')
+        $input.focus()
+        wk.notice($input, {
+            message: msg,
+            position: 'bottom'
+        })
+    }
+
+    // 重置表单
+    validate.reset = function () {
+        $dom.find('input').removeClass('form-control-error')
+        $dom.find('.form-group').removeClass('has-error')
+        $('[data-toggle="tooltip"]').tooltip('dispose')
+    }
+
+    validate.reset()
+
+    for (var key in opts) {
+        if (!opts[key].ok) { // 验证失败
+            validate.ok = false
+            validate.error(key, opts[key].msg)
+        }
+    }
+
+    return validate
 }

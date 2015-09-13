@@ -43,6 +43,9 @@ fis.match('*.js', {
 fis.match('common/global/**/*.js', {
     parser: null
 })
+fis.match('plugin/*.js', {
+    parser: null
+})
 fis.match('plugin/**/*.js', {
     parser: null
 })

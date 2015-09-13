@@ -10,29 +10,18 @@ var path = require('path')
 var http = require("http")
 var redis = require('koa-redis')
 var fs = require('fs')
+var log = require('./lib/log')
 
-// 计算响应时间
-app.use(function* (next) {
-    var start = new Date()
-
-    yield next
-
-    var ms = new Date() - start
-    console.log('url:', this.url, '\ttime:', ms + 'ms')
-});
-
-// 计划任务
-require('./lib/regularTask')
+// 请求健康记录
+app.use(log.requestHealth)
 
 // 加载配置文件
 var conf = require(path.join(__dirname,
     'config', 'config.js'))
 
+// koa配置
 app.name = conf.appName
-
 app.keys = [conf.appKeys.key, conf.appKeys.value]
-
-// 连接数据库
 
 
 // 设置session
@@ -44,7 +33,6 @@ app.use(session({
 */
 
 // 设置静态资源缓存
-// 处理public目录下的js, css, jpg, png , ttf, woff， eot, otf, svg文件
 var staticCache = require('koa-static-cache')
 app.use(staticCache(path.join(__dirname, conf.staticDir.path), {
     prefix: '/static',
@@ -65,11 +53,13 @@ app.use(router.allowedMethods())
 
 // 监听错误
 app.on("error", function (err, ctx) {
-    console.log('server error', err, ctx)
+    log.error('服务错误', err)
 })
 
-// 捕获未捕获的错误
+// 抓住未捕获的错误
 process.on('uncaughtException', function (err) {
+    log.erro('未捕获错误', err)
+
     //打印出错误
     console.log(err)
 
@@ -84,5 +74,3 @@ app.use(function* () {
 })
 
 app.listen(conf.port)
-
-console.log("service is running!")

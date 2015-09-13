@@ -6,16 +6,6 @@ var global = avalon.define({
         // 信息
         info: {},
 
-        // 设置信息
-        setInfo: function (val) {
-            val.portrait = wk.userImage(val.portrait)
-            global.my.info = val
-            global.my.isLogin = true
-
-            // 信息获取完毕
-            global.$myDeferred.resolve()
-        },
-
         // 是否已登陆
         isLogin: false,
 
@@ -41,9 +31,7 @@ var global = avalon.define({
         },
     },
 
-    // 获取消息盒子信息
-    getMessage: function () {},
-
+    // 我的信息是否加载完毕的promise
     $myDeferred: null,
 
     // 菜单

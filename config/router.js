@@ -1,6 +1,7 @@
 var fs = require('fs')
 var router = require('koa-router')()
 
+// 遍历文件夹
 function scanFolder(path) {
     var folderList = []
     var walk = function (path, folderList) {
@@ -32,18 +33,63 @@ controllers.forEach(function (path) {
         return
     }
 
-    // 循环方法
+    // 遍历每个方法
     for (var key in instance) {
+        // 完整的api
+        var api = instance[key]
         var apiName = key
         if (apiName !== 'index') {
             apiName = '/' + apiName
         } else {
             apiName = ''
         }
-
-        var method = 'get'
         var apiUrl = '/api/' + path.replace('controllers/', '') + apiName
-        router.get(apiUrl, instance[key])
+
+        // 遍历 get post put patch delete
+        for (var method in api) {
+            switch (method) {
+            case 'get':
+                if (typeof api[method] === 'object') {
+                    api[method].unshift(apiUrl)
+                    router.get.apply(router, api[method])
+                } else if (typeof api[method] === 'function') {
+                    router.get(apiUrl, api[method])
+                }
+                break
+            case 'post':
+                if (typeof api[method] === 'object') {
+                    api[method].unshift(apiUrl)
+                    router.post.apply(router, api[method])
+                } else if (typeof api[method] === 'function') {
+                    router.post(apiUrl, api[method])
+                }
+                break
+            case 'put':
+                if (typeof api[method] === 'object') {
+                    api[method].unshift(apiUrl)
+                    router.put.apply(router, api[method])
+                } else if (typeof api[method] === 'function') {
+                    router.put(apiUrl, api[method])
+                }
+                break
+            case 'patch':
+                if (typeof api[method] === 'object') {
+                    api[method].unshift(apiUrl)
+                    router.patch.apply(router, api[method])
+                } else if (typeof api[method] === 'function') {
+                    router.patch(apiUrl, api[method])
+                }
+                break
+            case 'delete':
+                if (typeof api[method] === 'object') {
+                    api[method].unshift(apiUrl)
+                    router.delete.apply(router, api[method])
+                } else if (typeof api[method] === 'function') {
+                    router.delete(apiUrl, api[method])
+                }
+                break
+            }
+        }
     }
 })
 

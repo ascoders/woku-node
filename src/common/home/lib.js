@@ -6,6 +6,7 @@ var appModal
 
 // 初始化创建app表单
 function initCreateAppForm() {
+    return
     appForm = $('#j-create-app-modal .ui.form');
     appForm.form({
         fields: {
@@ -39,6 +40,7 @@ function initCreateAppForm() {
 
 // 初始化创建app模态框
 function initCreateAppModal() {
+    return
     appModal = $('#j-create-app-modal')
     appModal.modal({
         blurring: true,
@@ -126,6 +128,7 @@ function menuAutoColor() {
 
 // 自定义路径复选框回调
 function customPath() {
+    return
     $('#j-custom-path').checkbox({
         onChecked: function () {
             vm.customPath = true

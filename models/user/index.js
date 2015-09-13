@@ -56,12 +56,9 @@ exports.update = function (data, where) {
 }
 
 // 查
-exports.findOne = function (where, attributes) {
+exports.findOne = function (info) {
     return new Promise(function (resolve) {
-        data.findOne({
-            where: where,
-            attributes: attributes
-        }).then(function (result) {
+        data.findOne(info).then(function (result) {
             if (result) {
                 resolve({
                     ok: true,
@@ -83,12 +80,9 @@ exports.findOne = function (where, attributes) {
 }
 
 // 查多个
-exports.findAll = function (where, attributes) {
+exports.findAll = function (info) {
     return new Promise(function (resolve) {
-        data.findAll({
-            where: where,
-            attributes: attributes
-        }).then(function (result) {
+        data.findAll(info).then(function (result) {
             if (result) {
                 resolve({
                     ok: true,
@@ -110,12 +104,9 @@ exports.findAll = function (where, attributes) {
 }
 
 // 查多个数据和数量
-exports.findAndCountAll = function (where, attributes) {
+exports.findAndCountAll = function (info) {
     return new Promise(function (resolve) {
-        data.findAndCountAll({
-            where: where,
-            attributes: attributes
-        }).then(function (result) {
+        data.findAndCountAll(info).then(function (result) {
             resolve({
                 ok: true,
                 data: result
