@@ -1,19 +1,3 @@
-// 依赖
-// npm install fis-parser-babelcore
-// npm install fis-parser-less
-
-// npm install koa
-// npm install koa-router
-// npm install koa-redis
-// npm install koa-static-cache
-// npm install koa-conditional-get
-// npm install koa-etag
-// npm install koa-bodyparser
-// npm install node-schedule
-// npm install mysql
-// npm install sequelize
-// npm install validator
-
 // atom插件
 // autocomplete-modules
 

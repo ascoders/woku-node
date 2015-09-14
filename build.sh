@@ -8,9 +8,11 @@ then
   echo 'insatll pm2..'
   npm install -g pm2
 
-  echo 'install npm plugs..'
+  echo 'install fis plugs..'
   npm install fis-parser-babelcore
   npm install fis-parser-less
+
+  echo 'install koa plugs'
   npm install koa
   npm install koa-router
   npm install koa-redis
@@ -19,10 +21,14 @@ then
   npm install koa-conditional-get
   npm install koa-etag
   npm install koa-bodyparser
+
+  echo 'install server plugs'
   npm install node-schedule
   npm install mysql
   npm install sequelize
   npm install validator
+  npm install nodemailer
+  npm install nodemailer-smtp-transport
 fi
 
 echo 'run pm2'

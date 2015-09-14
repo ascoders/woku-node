@@ -11,6 +11,12 @@ var http = require("http")
 var redis = require('koa-redis')
 var fs = require('fs')
 var log = require('./lib/log')
+var sign = require('./lib/sign')
+
+console.log(sign.create('213', 60 * 60, {
+    c: 'c',
+    a: 'a'
+}))
 
 // 请求健康记录
 app.use(log.requestHealth)
@@ -58,7 +64,7 @@ app.on("error", function (err, ctx) {
 
 // 抓住未捕获的错误
 process.on('uncaughtException', function (err) {
-    log.erro('未捕获错误', err)
+    log.error('未捕获错误', err)
 
     //打印出错误
     console.log(err)
