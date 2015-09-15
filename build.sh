@@ -5,12 +5,13 @@ then
   echo 'install fis3..'
   npm install -g fis3
 
-  echo 'insatll pm2..'
+  echo 'intall pm2..'
   npm install -g pm2
 
   echo 'install fis plugs..'
   npm install fis-parser-babelcore
   npm install fis-parser-less
+  npm install fis-optimizer-html-minifier
 
   echo 'install koa plugs'
   npm install koa
@@ -29,11 +30,21 @@ then
   npm install validator
   npm install nodemailer
   npm install nodemailer-smtp-transport
+
+  echo 'install code cover plugs'
+  npm install blanket
+
+  echo 'install test plugs'
+  npm install -g mocha
+  npm install should
 fi
 
+echo 'run test'
+mocha --harmony --require blanket "test/**/*.js"
+
 echo 'run pm2'
-sudo pm2 delete all
-sudo pm2 start app.js --node-args="--harmony" --watch --ignore-watch="src static node_modules" --merge-logs -f
+pm2 delete all
+pm2 start app.js --node-args="--harmony" --watch --ignore-watch="src static test node_modules" --merge-logs -f
 
 echo 'run fis3 dev mode..'
 fis3 release -d static -r src -f fis-conf.js -w -l

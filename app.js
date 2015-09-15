@@ -12,18 +12,10 @@ var redis = require('koa-redis')
 var fs = require('fs')
 var log = require('./lib/log')
 var sign = require('./lib/sign')
-
-console.log(sign.create('213', 60 * 60, {
-    c: 'c',
-    a: 'a'
-}))
+var conf = require('./config/config')
 
 // 请求健康记录
 app.use(log.requestHealth)
-
-// 加载配置文件
-var conf = require(path.join(__dirname,
-    'config', 'config.js'))
 
 // koa配置
 app.name = conf.appName
@@ -42,7 +34,10 @@ app.use(session({
 var staticCache = require('koa-static-cache')
 app.use(staticCache(path.join(__dirname, conf.staticDir.path), {
     prefix: '/static',
-    maxAge: conf.staticDir.maxAge
+    maxAge: conf.staticDir.maxAge,
+    buffer: true,
+    gzip: true,
+    usePrecompiledGzip: true
 }))
 
 // 设置etag
