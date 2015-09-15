@@ -9,8 +9,14 @@ brew install mysql
 ## install for Windows
 手动安装 redis mysql 服务
 
-## 依赖管理
+## 安装
 
-```go
-go get github.com/ascoders/as
+```js
+sh build.sh install
+```
+
+## 启动后端服务&前端部署脚本
+
+```js
+sh build.sh
 ```

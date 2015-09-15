@@ -8,7 +8,7 @@ then
   echo 'insatll pm2..'
   npm install -g pm2
 
-  echo 'install npm plugs..'
+  echo 'install server plugs..'
   npm install fis-parser-babelcore
   npm install fis-parser-less
   npm install koa
@@ -23,6 +23,10 @@ then
   npm install mysql
   npm install sequelize
   npm install validator
+
+  echo 'install test plugs'
+  npm install -g mocha
+  npm install should
 fi
 
 echo 'run pm2'
