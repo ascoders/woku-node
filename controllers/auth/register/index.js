@@ -1,6 +1,4 @@
 var user = require('../../../models/user')
-var crypto = require('crypto')
-var validator = require('validator')
 var email = require('../../../lib/email')
 var sign = require('../../../lib/sign')
 

@@ -1,7 +1,7 @@
 var sign = require('../../lib/sign')
 var url = require('url')
 
-describe("sign", function () {
+describe("lib/sign", function () {
     it("生成的签名可以通过", function () {
         // 随机token
         var token = 'vghj23b4oih3g32jk'

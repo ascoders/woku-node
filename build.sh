@@ -34,6 +34,7 @@ then
 
   echo '[install code cover plugs]'
   npm install blanket
+  npm install travis-cov
 
   echo '[install test plugs]'
   npm install -g mocha

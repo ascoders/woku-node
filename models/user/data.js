@@ -1,16 +1,16 @@
-var Sequelize = require('sequelize')
+var sequelize = require('sequelize')
 var base = require('../base')
 
 var user = base.define('user', {
     id: {
         comment: '主键',
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
     },
     nickname: {
         comment: '昵称 唯一索引',
-        type: Sequelize.STRING(10),
+        type: sequelize.STRING(10),
         unique: true,
         allowNull: false,
         validate: {
@@ -22,7 +22,7 @@ var user = base.define('user', {
     },
     email: {
         comment: '电子邮箱 唯一索引',
-        type: Sequelize.STRING(30),
+        type: sequelize.STRING(30),
         unique: true,
         validate: {
             isEmail: {
@@ -32,11 +32,11 @@ var user = base.define('user', {
     },
     password: {
         comment: '密码',
-        type: Sequelize.CHAR(32)
+        type: sequelize.CHAR(32)
     },
     portrait: {
         comment: '头像地址',
-        type: Sequelize.CHAR(30),
+        type: sequelize.CHAR(30),
         validate: {
             len: {
                 args: [1, 30],
@@ -46,7 +46,7 @@ var user = base.define('user', {
     },
     money: {
         comment: '账户余额',
-        type: Sequelize.DECIMAL(10, 3),
+        type: sequelize.DECIMAL(10, 3),
         defaultValue: 0
     },
     login_count: {
@@ -61,12 +61,12 @@ var user = base.define('user', {
     },
     stop_time: {
         comment: '账号封停截至时间',
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        type: sequelize.DATE,
+        defaultValue: sequelize.NOW
     },
     type: {
         comment: '账号类型',
-        type: Sequelize.ENUM('admin', 'member', 'vip'),
+        type: sequelize.ENUM('admin', 'member', 'vip'),
         defaultValue: 'member'
     },
     upload_size: {
@@ -76,11 +76,11 @@ var user = base.define('user', {
     },
     token: {
         comment: '密钥',
-        type: Sequelize.CHAR(32),
+        type: sequelize.CHAR(16),
         validate: {
             len: {
-                args: 32,
-                msg: '密钥长度为32'
+                args: 16,
+                msg: '密钥长度为16'
             }
         }
     }

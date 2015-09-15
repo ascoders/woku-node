@@ -8,5 +8,6 @@ module.exports = new Sequelize(conf.db.name, conf.db.user, conf.db.password, {
         max: 10,
         min: 1,
         idle: 10000
-    }
+    },
+    logging: false
 })

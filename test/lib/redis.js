@@ -3,7 +3,7 @@ var url = require('url')
 var assert = require('assert')
 var muk = require('muk')
 
-describe("redis", function () {
+describe("lib/redis", function () {
     it("存储的字符串能被查找到", function* () {
         var key = 'test'
         var value = 'abc'
