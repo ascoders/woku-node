@@ -137,11 +137,9 @@ describe('models/user', function () {
     describe('删除', function () {
         beforeEach(function* () {
             var result = yield user.add({
-                where: {
-                    nickname: 'test',
-                    password: 'abcdef',
-                    email: '576625322@qq.com'
-                }
+                nickname: 'test',
+                password: 'abcdef',
+                email: '576625322@qq.com'
             })
             result.ok.should.equal(true)
         })
