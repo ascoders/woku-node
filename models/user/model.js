@@ -1,7 +1,7 @@
 var sequelize = require('sequelize')
 var base = require('../base')
 
-var user = base.define('user', {
+var model = base.define('user', {
     id: {
         comment: '主键',
         type: sequelize.INTEGER.UNSIGNED,
@@ -76,11 +76,11 @@ var user = base.define('user', {
     },
     token: {
         comment: '密钥',
-        type: sequelize.CHAR(16),
+        type: sequelize.CHAR(32),
         validate: {
             len: {
-                args: 16,
-                msg: '密钥长度为16'
+                args: 32,
+                msg: '密钥长度为32'
             }
         }
     }
@@ -88,6 +88,6 @@ var user = base.define('user', {
     underscored: true
 })
 
-user.sync()
+model.sync()
 
-module.exports = user
+module.exports = model

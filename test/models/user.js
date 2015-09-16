@@ -1,3 +1,6 @@
+var conf = require('../../config/config')
+conf.db.name = 'test_woku'
+
 var user = require('../../models/user')
 var muk = require('muk')
 var crypto = require('crypto')
@@ -13,6 +16,12 @@ describe('models/user', function () {
             }
         })
         result.ok.should.equal(true)
+    })
+
+    after(function* () {
+        // 删除数据表
+        var userModel = require('../../models/user/model')
+        yield userModel.drop()
     })
 
     describe('插入', function () {
@@ -164,7 +173,7 @@ describe('models/user', function () {
             result.ok.should.equal(true)
         })
 
-        it('可以删除成功', function* () {
+        it('删除成功', function* () {
             var result = yield user.delete({
                 where: {
                     nickname: 'test'
@@ -187,15 +196,13 @@ describe('models/user', function () {
         afterEach(function* () {
             var result = yield user.delete({
                 where: {
-                    nickname: {
-                        $in: ['test']
-                    }
+                    nickname: 'test'
                 }
             })
             result.ok.should.equal(true)
         })
 
-        it('可以更新成功', function* () {
+        it('更新成功', function* () {
             var result = yield user.update({
                 portrait: '123'
             }, {
@@ -268,7 +275,7 @@ describe('models/user', function () {
                 where: {
                     nickname: 'test'
                 },
-                attributes: ['email']
+                attributes: ['email', 'nickname']
             })
             result.ok.should.equal(true)
             result.data.email.should.equal('576625322@qq.com')
@@ -280,7 +287,7 @@ describe('models/user', function () {
                 where: {
                     nickname: 'test'
                 },
-                attributes: ['email']
+                attributes: ['email', 'nickname']
             })
             result.ok.should.equal(true)
             result.data.count.should.equal(1)

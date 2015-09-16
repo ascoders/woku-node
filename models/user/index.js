@@ -1,4 +1,4 @@
-var data = require('./data')
+var model = require('./model')
 var validator = require('validator')
 var crypto = require('crypto')
 
@@ -54,7 +54,7 @@ exports.add = function (info) {
             info.password = crypto.createHash('md5').update(info.password + info.token).digest('hex')
 
             // 插入
-            data.create(info).then(function (result) {
+            model.create(info).then(function (result) {
                 return resolve({
                     ok: true,
                     data: result
@@ -72,7 +72,7 @@ exports.add = function (info) {
 // 删
 exports.delete = function (opts) {
     return new Promise(function (resolve) {
-        data.destroy(opts).then(function (result) {
+        model.destroy(opts).then(function (result) {
             resolve({
                 ok: true,
                 data: result
@@ -89,7 +89,7 @@ exports.delete = function (opts) {
 // 改
 exports.update = function (info, opts) {
     return new Promise(function (resolve) {
-        data.update(info, opts).then(function (result) {
+        model.update(info, opts).then(function (result) {
             resolve({
                 ok: true,
                 data: result
@@ -107,7 +107,7 @@ exports.update = function (info, opts) {
 // 查
 exports.findOne = function (info) {
     return new Promise(function (resolve) {
-        data.findOne(info).then(function (result) {
+        model.findOne(info).then(function (result) {
             if (result) {
                 resolve({
                     ok: true,
@@ -131,7 +131,7 @@ exports.findOne = function (info) {
 // 查多个
 exports.findAll = function (info) {
     return new Promise(function (resolve) {
-        data.findAll(info).then(function (result) {
+        model.findAll(info).then(function (result) {
             if (result) {
                 resolve({
                     ok: true,
@@ -155,7 +155,7 @@ exports.findAll = function (info) {
 // 查多个数据和数量
 exports.findAndCountAll = function (info) {
     return new Promise(function (resolve) {
-        data.findAndCountAll(info).then(function (result) {
+        model.findAndCountAll(info).then(function (result) {
             resolve({
                 ok: true,
                 data: result

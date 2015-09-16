@@ -42,15 +42,22 @@ then
   npm install co-mocha
   npm install muk
   npm install rewire
+  npm install superagent
+
+  exit
 fi
 
-echo '[run cover]'
-mocha --harmony -R travis-cov "test/**/*.js"
-echo '[created coverage.html]'
-mocha --harmony -R html-cov > coverage.html "test/**/*.js"
+if [[ $1 == "test" ]]
+then
+    echo '[run cover& created coverage.html]'
+    mocha --harmony -R travis-cov "test/**/*.js"
+    mocha --harmony -R html-cov > coverage.html "test/**/*.js"
 
-echo '[run test]'
-mocha --harmony "test/**/*.js"
+    echo '[run test]'
+    mocha --harmony "test/**/*.js" -s 10
+
+    exit
+fi
 
 echo '[run pm2]'
 pm2 delete all
