@@ -41,6 +41,7 @@ then
   npm install should
   npm install co-mocha
   npm install muk
+  npm install rewire
 fi
 
 echo '[run cover]'

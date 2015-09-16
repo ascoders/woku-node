@@ -2,9 +2,6 @@ var data = require('./data')
 var validator = require('validator')
 var crypto = require('crypto')
 
-// model对象
-exports.model = data
-
 // 增
 exports.add = function (info) {
     return new Promise(function (resolve) {
@@ -90,14 +87,15 @@ exports.delete = function (opts) {
 }
 
 // 改
-exports.update = function (data, opts) {
+exports.update = function (info, opts) {
     return new Promise(function (resolve) {
-        data.update(data, opts).then(function (result) {
+        data.update(info, opts).then(function (result) {
             resolve({
                 ok: true,
                 data: result
             })
         }).catch(function (err) {
+            console.log('error', err)
             resolve({
                 ok: false,
                 data: err

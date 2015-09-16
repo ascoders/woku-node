@@ -53,8 +53,8 @@ describe("lib/redis", function () {
 
         // 查询存储的字符串
         var result = yield redis.get(key, true)
-        assert.equal(result, null)
 
         muk.restore()
+        assert.equal(result, null)
     })
 })

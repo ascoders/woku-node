@@ -1,4 +1,7 @@
 var user = require('../../models/user')
+var muk = require('muk')
+var crypto = require('crypto')
+var assert = require('assert')
 
 describe('models/user', function () {
     afterEach(function* () {
@@ -20,6 +23,23 @@ describe('models/user', function () {
                 email: '576625322@qq.com'
             })
             result.ok.should.equal(true)
+        })
+
+        it('token生成错误返回error', function* () {
+            muk(crypto, 'randomBytes', function (length, callback) {
+                process.nextTick(function () {
+                    callback(new Error('err!'), null)
+                })
+            })
+
+            var result = yield user.add({
+                nickname: 'test',
+                password: 'abcdef',
+                email: '576625322@qq.com'
+            })
+
+            muk.restore()
+            result.ok.should.equal(false)
         })
 
         it('主键不能赋值', function* () {
@@ -144,6 +164,26 @@ describe('models/user', function () {
             result.ok.should.equal(true)
         })
 
+        it('可以删除成功', function* () {
+            var result = yield user.delete({
+                where: {
+                    nickname: 'test'
+                }
+            })
+            result.ok.should.equal(true)
+        })
+    })
+
+    describe('修改', function () {
+        beforeEach(function* () {
+            var result = yield user.add({
+                nickname: 'test',
+                password: 'abcdef',
+                email: '576625322@qq.com'
+            })
+            result.ok.should.equal(true)
+        })
+
         afterEach(function* () {
             var result = yield user.delete({
                 where: {
@@ -164,6 +204,86 @@ describe('models/user', function () {
                 }
             })
             result.ok.should.equal(true)
+        })
+    })
+
+    describe('查找', function () {
+        beforeEach(function* () {
+            var result = yield user.add({
+                nickname: 'test',
+                password: 'abcdef',
+                email: '576625322@qq.com'
+            })
+            result.ok.should.equal(true)
+
+            var result = yield user.add({
+                nickname: 'test1',
+                password: 'abcdef',
+                email: '5766253221@qq.com'
+            })
+            result.ok.should.equal(true)
+
+            var result = yield user.add({
+                nickname: 'test2',
+                password: 'abcdef',
+                email: '5766253223@qq.com'
+            })
+            result.ok.should.equal(true)
+        })
+
+        afterEach(function* () {
+            var result = yield user.delete({
+                where: {
+                    nickname: {
+                        $in: ['test', 'test1', 'test2']
+                    }
+                }
+            })
+            result.ok.should.equal(true)
+        })
+
+        it('单个查找', function* () {
+            var result = yield user.findOne({
+                where: {
+                    nickname: 'test'
+                }
+            })
+            result.ok.should.equal(true)
+        })
+
+        it('多个查找', function* () {
+            var result = yield user.findAll({
+                where: {
+                    nickname: {
+                        $in: ['test', 'test1', 'test2']
+                    }
+                }
+            })
+            result.ok.should.equal(true)
+            result.data.length.should.equal(3)
+        })
+
+        it('查找指定列', function* () {
+            var result = yield user.findOne({
+                where: {
+                    nickname: 'test'
+                },
+                attributes: ['email']
+            })
+            result.ok.should.equal(true)
+            result.data.email.should.equal('576625322@qq.com')
+            assert.equal(result.data.id, undefined)
+        })
+
+        it('查找并返回总数', function* () {
+            var result = yield user.findAndCountAll({
+                where: {
+                    nickname: 'test'
+                },
+                attributes: ['email']
+            })
+            result.ok.should.equal(true)
+            result.data.count.should.equal(1)
         })
     })
 })
