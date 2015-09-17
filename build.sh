@@ -33,6 +33,7 @@ then
   npm install validator
   npm install nodemailer
   npm install nodemailer-smtp-transport
+  npm install log4js
 
   echo '[install code cover plugs]'
   npm install blanket
@@ -53,14 +54,14 @@ if [[ $1 == "test" ]]
 then
     export NODE_APP_DEV=true
 
-    pm2 start app.js --node-args="--harmony"
+    pm2 start app.js
 
     echo '[run cover& created coverage.html]'
-    mocha --harmony -R travis-cov "test/**/*.js"
-    mocha --harmony -R html-cov > coverage.html "test/**/*.js"
+    mocha -R travis-cov "test/**/*.js"
+    mocha -R html-cov > coverage.html "test/**/*.js"
 
     echo '[run test]'
-    mocha --harmony "test/**/*.js" -s 10
+    mocha "test/**/*.js" -s 10
 
     pm2 delete app.js
 
@@ -69,7 +70,7 @@ fi
 
 echo '[run pm2]'
 pm2 delete all
-pm2 start app.js --node-args="--harmony" --watch --ignore-watch="src static test node_modules" --merge-logs -f
+pm2 start app.js --watch --ignore-watch="src static test node_modules" --merge-logs -f
 
 echo '[run fis3 dev mode..]'
 fis3 release -d static -r src -f fis-conf.js -w -l

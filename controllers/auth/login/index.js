@@ -8,7 +8,7 @@ exports.index = {
         if (!validator.isLength(this.query.password, 6, 30)) {
             return this.body = {
                 ok: false,
-                data: '密码长度为6-30' + this.query.password
+                data: '密码长度为6-30'
             }
         }
 

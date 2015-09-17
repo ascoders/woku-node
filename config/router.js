@@ -30,6 +30,7 @@ controllers.forEach(function (path) {
     try {
         instance = require('../' + path)
     } catch (err) {
+        console.log(err)
         return
     }
 
