@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export NODE_APP_DEV=false
+
 if [[ $1 == "install" ]]
 then
   echo '[install fis3..]'
@@ -49,12 +51,18 @@ fi
 
 if [[ $1 == "test" ]]
 then
+    export NODE_APP_DEV=true
+
+    pm2 start app.js --node-args="--harmony"
+
     echo '[run cover& created coverage.html]'
     mocha --harmony -R travis-cov "test/**/*.js"
     mocha --harmony -R html-cov > coverage.html "test/**/*.js"
 
     echo '[run test]'
     mocha --harmony "test/**/*.js" -s 10
+
+    pm2 delete app.js
 
     exit
 fi

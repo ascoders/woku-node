@@ -1,12 +1,15 @@
-var conf = require('../../config/config')
-conf.db.name = 'test_woku'
-
 var user = require('../../models/user')
+var userModel = require('../../models/user/model')
 var muk = require('muk')
 var crypto = require('crypto')
 var assert = require('assert')
 
 describe('models/user', function () {
+    before(function* () {
+        // 创建数据表
+        yield userModel.sync()
+    })
+
     afterEach(function* () {
         var result = yield user.delete({
             where: {
@@ -20,7 +23,6 @@ describe('models/user', function () {
 
     after(function* () {
         // 删除数据表
-        var userModel = require('../../models/user/model')
         yield userModel.drop()
     })
 

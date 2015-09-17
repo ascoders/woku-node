@@ -8,7 +8,7 @@ var koa = require('koa')
 var app = koa()
 var path = require('path')
 var http = require("http")
-var redis = require('koa-redis')
+var redisStore = require('koa-redis')
 var fs = require('fs')
 var log = require('./lib/log')
 var sign = require('./lib/sign')
@@ -21,14 +21,11 @@ app.use(log.requestHealth)
 app.name = conf.appName
 app.keys = [conf.appKeys.key, conf.appKeys.value]
 
-
 // 设置session
-/*
 var session = require('koa-generic-session')
 app.use(session({
-	store: redis()
+    store: redisStore()
 }))
-*/
 
 // 设置静态资源缓存
 var staticCache = require('koa-static-cache')

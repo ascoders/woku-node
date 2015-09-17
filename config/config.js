@@ -23,7 +23,7 @@ exports.templatePath = 'static/common/global/global.html'
 
 // 数据库
 exports.db = {
-    name: 'woku',
+    name: process.env.NODE_APP_DEV ? 'woku_test' : 'woku',
     user: 'root',
     password: '',
     host: 'localhost',

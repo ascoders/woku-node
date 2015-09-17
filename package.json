@@ -34,7 +34,7 @@
     },
     "config": {
         "blanket": {
-            "pattern": ["lib", "models"],
+            "pattern": ["lib", "controllers", "models"],
             "data-cover-never": ["node_modules", "test"]
         }
     }
