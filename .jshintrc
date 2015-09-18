@@ -14,5 +14,6 @@
     "sub": true,
     "browser": true,
     "devel": true,
-    "jquery": true
+    "jquery": true,
+    "es6": true
 }

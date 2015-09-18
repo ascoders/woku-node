@@ -71,6 +71,4 @@ app.use(function *() {
     this.body = templateHtmlBuf
 })
 
-console.log(123)
-
 module.exports = app.listen(conf.port)
