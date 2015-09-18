@@ -7,7 +7,7 @@ var appModal
 // 初始化创建app表单
 function initCreateAppForm() {
     return
-    appForm = $('#j-create-app-modal .ui.form');
+    appForm = $('#j-create-app-modal .ui.form')
     appForm.form({
         fields: {
             name: {
