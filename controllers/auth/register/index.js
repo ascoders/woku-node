@@ -1,40 +1,65 @@
 var user = require('../../../models/user')
 var email = require('../../../lib/email')
 var sign = require('../../../lib/sign')
+var crypto = require('crypto')
+var conf = require('../../../config/config')
+var validator = require('validator')
+var parse = require('co-body')
 
-// 发送注册邮件
 exports.index = {
+    // 发送注册邮件
     get: function* () {
-        console.log(this.query)
-        email.send({
-            to: this.query.email,
-            title: this.query.nickname + '! 请在60分钟内激活账号',
-            content: sign.create('123', this.query)
-        })
-    }
-}
-
-// 判断昵称是否可以注册
-exports.nicknameLegal = {
-    get: function* () {
-        // 查询昵称是否存在
-        var result = yield user.findOne({
-            where: {
-                nickname: this.query.nickname
-            },
-            attribute: ['id']
-        })
-
-        if (result.ok) {
-            // 查到了用户，此昵称不可用
+        // 随机生成token
+        var token
+        try {
+            token = crypto.randomBytes(16).toString('hex')
+        } catch (err) {
             return this.body = {
                 ok: false,
-                data: '昵称已被占用'
+                data: '生成随机token失败'
             }
         }
 
-        return this.body = {
-            ok: true
+        // 在session中设置注册token
+        this.session.registerToken = token
+
+        var dataUrl = sign.create(this.session.registerToken, 60 * 60, {
+            nickname: this.query.nickname,
+            email: this.query.email,
+            password: this.query.password
+        })
+
+        if (!conf.test) {
+            email.send({
+                to: this.query.email,
+                title: this.query.nickname + '! 请在1小时内激活账号',
+                content: dataUrl
+            })
+        } else {
+            return this.body = {
+                ok: true,
+                data: dataUrl
+            }
+        }
+    },
+
+    // 根据url注册用户
+    post: function* () {
+        var body = yield parse(this, {
+            limit: '1kb'
+        })
+
+        var check = sign.check(this.session.registerToken, body)
+
+        if (check.ok) {
+            return this.body = {
+                ok: true
+            }
+        } else {
+            return this.body = {
+                ok: false,
+                data: check.data
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ then
   npm install redis
   npm install sequelize
   npm install validator
+  npm install co-body
   npm install nodemailer
   npm install nodemailer-smtp-transport
   npm install log4js

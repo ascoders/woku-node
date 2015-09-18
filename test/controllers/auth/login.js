@@ -1,10 +1,10 @@
 var conf = require('../../../config/config')
 var host = 'http://localhost:' + conf.port + '/api'
-    //var app = require('../../../app')
 
 var agent = require('superagent').agent()
 var userModel = require('../../../models/user/model')
 var user = require('../../../models/user')
+
 describe("controllers", function () {
     describe("auth", function () {
         describe("login", function () {

@@ -47,3 +47,6 @@ exports.redis = {
 
 // 调试模式
 exports.debug = true
+
+// 是否在测试环境
+exports.test = process.env.NODE_APP_DEV ? true : false
