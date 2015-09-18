@@ -48,7 +48,7 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 // 监听错误
-app.on("error", function (err, ctx) {
+app.on("error", function (err) {
     console.log('服务错误', err)
 })
 
@@ -67,8 +67,10 @@ process.on('uncaughtException', function (err) {
 var templateHtml = fs.readFileSync(conf.templatePath, "utf-8")
 var templateHtmlBuf = new Buffer(templateHtml, 'utf-8')
 templateHtml = null
-app.use(function* () {
+app.use(function *() {
     this.body = templateHtmlBuf
 })
+
+console.log(123)
 
 module.exports = app.listen(conf.port)
