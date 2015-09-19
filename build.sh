@@ -53,11 +53,13 @@ pm2 delete app.js
 pm2 start app.js
 
 echo '[run cover& created coverage.html]'
-mocha -R travis-cov "test/**/*.js"
-mocha -R html-cov > coverage.html "test/**/*.js"
+#mocha -R travis-cov "test/**/*.js"
+#mocha -R html-cov > coverage.html "test/**/*.js"
 
 echo '[run test]'
-mocha "test/**/*.js" -s 10
+mocha "controllers/**/test.js" -s 10 --check-leaks --es_staging
+mocha "models/**/test.js" -s 10 --check-leaks --es_staging
+mocha "lib/**/test.js" -s 10 --check-leaks --es_staging
 
 pm2 delete app.js
 

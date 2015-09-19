@@ -1,5 +1,5 @@
-var user = require('../../models/user')
-var userModel = require('../../models/user/model')
+var user = require('./index')
+var userModel = require('./model')
 var muk = require('muk')
 var crypto = require('crypto')
 var assert = require('assert')
