@@ -1,39 +1,60 @@
 <div class="container m-t-md">
     <div class="row">
         <!-- 左侧表单区域 -->
-        <div class="col-sm-8">
+        <div class="col-sm-8"
+             id="j-form">
             <div class="form-group row">
-                <label for="label-account" class="col-sm-2 form-control-label">帐号</label>
+                <label for="label-account"
+                       class="col-sm-2 form-control-label">帐号</label>
+
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="label-account" placeholder="户名 / 邮箱 / 手机号">
+                    <input type="email"
+                           class="form-control"
+                           id="label-account"
+                           ms-duplex="form.account"
+                           name="account"
+                           placeholder="户名 / 邮箱 / 手机号">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="label-password" class="col-sm-2 form-control-label">密码</label>
+                <label for="label-password"
+                       class="col-sm-2 form-control-label">密码</label>
+
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="label-password">
+                    <input type="password"
+                           class="form-control"
+                           ms-duplex="form.password"
+                           name="password"
+                           id="label-password">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2"></label>
+
                 <div class="col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> 记住密码
+                            <input ms-duplex-checked="form.remind"
+                                   type="checkbox"> 记住密码
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">登录</button>
+                    <button type="submit"
+                            ms-click="submit"
+                            class="btn btn-primary">登录
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- 右侧注册按钮区域 -->
         <div class="col-sm-4">
-            <a class="btn btn-secondary" href="/auth/register" router>注册</a>
+            <a class="btn btn-secondary"
+               href="/auth/register"
+               router>注册</a>
         </div>
     </div>
 </div>

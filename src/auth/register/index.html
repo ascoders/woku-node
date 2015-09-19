@@ -4,68 +4,81 @@
         <div class="col-sm-8">
             <!-- 基本信息 -->
             <div ms-if="step == 'info'"
-                id="j-info">
+                 id="j-info">
                 <div class="form-group row">
                     <label for="label-nickname"
-                        class="col-sm-2 form-control-label">用户名</label>
+                           class="col-sm-2 form-control-label">用户名</label>
+
                     <div class="col-sm-10">
                         <input type="email"
-                            class="form-control"
-                            id="label-nickname"
-                            placeholder="推荐英文"
-                            name="nickname"
-                            ms-duplex="data.nickname">
+                               class="form-control"
+                               id="label-nickname"
+                               placeholder="推荐英文"
+                               name="nickname"
+                               ms-duplex="data.nickname">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="label-password"
-                        class="col-sm-2 form-control-label">密码</label>
+                           class="col-sm-2 form-control-label">密码</label>
+
                     <div class="col-sm-10">
                         <input type="password"
-                            class="form-control"
-                            name="password"
-                            id="label-password"
-                            ms-duplex="data.password">
+                               class="form-control"
+                               name="password"
+                               id="label-password"
+                               ms-duplex="data.password">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button ms-click="submitInfo()"
-                            class="btn btn-primary">下一步</button>
+                                ms-attr-disabled="isloading"
+                                class="btn btn-primary">
+                            <i ms-if="isloading" class="fa fa-refresh fa-spin"></i>
+                            <span ms-if="!isloading">下一步</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- 邮箱验证 -->
             <div ms-if="step == 'email'"
-                id="j-email">
+                 id="j-email">
                 <div class="form-group row">
                     <label for="label-email"
-                        class="col-sm-2 form-control-label">邮箱</label>
+                           class="col-sm-2 form-control-label">邮箱</label>
+
                     <div class="col-sm-10">
                         <input type="email"
-                            class="form-control"
-                            id="label-email"
-                            placeholder="请提供常用邮箱"
-                            name="email"
-                            ms-duplex="data.email">
+                               class="form-control"
+                               id="label-email"
+                               placeholder="请提供常用邮箱"
+                               name="email"
+                               ms-duplex="data.email">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="label-captcha"
-                        class="col-sm-2 form-control-label">验证码</label>
+                           class="col-sm-2 form-control-label">验证码</label>
+
                     <div class="col-sm-10">
                         <input type="captcha"
-                            class="form-control"
-                            name="captcha"
-                            ms-duplex="data.captcha"
-                            id="label-captcha">
+                               class="form-control"
+                               name="captcha"
+                               ms-duplex="data.captcha"
+                               id="label-captcha">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button ms-click="submitEmail()"
-                            class="btn btn-primary">下一步</button>
+                                class="btn btn-primary">
+                            <i ms-if="isloading"
+                               ms-attr-disabled="isloading"
+                               class="fa fa-refresh fa-spin"></i>
+                            <span ms-if="!isloading">下一步</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -73,7 +86,7 @@
             <!-- 注册成功 -->
             <div ms-if="step == 'success'">
                 <div class="alert alert-success text-center"
-                    role="alert">
+                     role="alert">
                     <strong>注册成功！</strong> 请进入邮箱，点击确认邮件
                 </div>
             </div>
@@ -84,14 +97,14 @@
         <div class="col-sm-4">
             <div class="list-group">
                 <button ms-repeat="steps"
-                    type="button"
-                    ms-click="setStep($key)"
-                    ms-class="active:step == $key"
-                    ms-class-1="disabled:$val.locked"
-                    ms-attr-disabled="$val.locked"
-                    class="list-group-item">
+                        type="button"
+                        ms-click="setStep($key)"
+                        ms-class="active:step == $key"
+                        ms-class-1="disabled:$val.locked"
+                        ms-attr-disabled="$val.locked"
+                        class="list-group-item">
                     <i class="fa m-r"
-                        ms-class="fa-{{$val.icon}}"></i>{{$val.name}}
+                       ms-class="fa-{{$val.icon}}"></i>{{$val.name}}
                 </button>
             </div>
         </div>

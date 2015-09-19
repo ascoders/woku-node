@@ -65,10 +65,9 @@ process.on('uncaughtException', function (err) {
 
 // 统一模版
 var templateHtml = fs.readFileSync(conf.templatePath, "utf-8")
-var templateHtmlBuf = new Buffer(templateHtml, 'utf-8')
-templateHtml = null
 app.use(function *() {
-    this.body = templateHtmlBuf
+    this.type = 'text/html; charset=utf-8'
+    this.body = templateHtml
 })
 
 module.exports = app.listen(conf.port)

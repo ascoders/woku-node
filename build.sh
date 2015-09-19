@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export NODE_APP_DEV=false
-
 if [[ $1 == "install" ]]
 then
   echo '[install fis3..]'
@@ -51,21 +49,30 @@ then
   exit
 fi
 
-export NODE_APP_DEV=true
+if [[ $1 == "test" ]]
+then
 
-pm2 delete app.js
-pm2 start app.js
+    export NODE_APP_DEV=true
 
-echo '[run cover& created coverage.html]'
-mocha -R travis-cov "test/**/*.js"
-mocha -R html-cov > coverage.html "test/**/*.js"
+    pm2 delete app.js
+    pm2 start app.js
 
-echo '[run test]'
-mocha "test/**/*.js" -s 10
+    echo '[run cover& created coverage.html]'
+    mocha -R travis-cov "test/**/*.js"
+    mocha -R html-cov > coverage.html "test/**/*.js"
 
-pm2 delete app.js
+    echo '[run test]'
+    mocha "test/**/*.js" -s 10
+
+    pm2 delete app.js
+
+  exit
+fi
+
+export NODE_APP_DEV=false
 
 echo '[run pm2]'
+pm2 delete app.js
 pm2 start app.js --watch --ignore-watch="src static test node_modules" --merge-logs -f
 
 echo '[run fis3 dev mode..]'

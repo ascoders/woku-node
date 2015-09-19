@@ -21,6 +21,9 @@ var vm = avalon.define({
     // 步骤名
     step: 'info',
 
+    // 是否在加载中
+    isloading: false,
+
     // 进入任意步骤
     setStep: function (name) {
         vm.step = name
@@ -45,17 +48,23 @@ var vm = avalon.define({
             }
 
             // 查询用户名是否存在
-            $.ajax('/api/auth/register/nicknameLegal', {
+            $.ajax('/api/common/user/nickname', {
                 type: 'get',
                 data: {
                     nickname: vm.data.nickname
                 },
+                beforeSend: function () {
+                    vm.isloading = true
+                },
                 success: function (data) {
-                    if (!data.ok) {
+                    if (data.ok) {
                         return validate.error('nickname', vm.data.nickname + ' 已被占用')
                     }
                     vm.step = 'email'
                     vm.steps.email.locked = false
+                },
+                complete: function () {
+                    vm.isloading = false
                 }
             })
         })
@@ -83,8 +92,14 @@ var vm = avalon.define({
             $.ajax('/api/auth/register', {
                 type: 'get',
                 data: vm.data,
+                beforeSend: function () {
+                    vm.isloading = true
+                },
                 success: function (data) {
                     console.log(data)
+                },
+                complete: function () {
+                    vm.isloading = false
                 }
             })
 

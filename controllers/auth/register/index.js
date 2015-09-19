@@ -35,6 +35,10 @@ exports.index = {
                 title: this.query.nickname + '! 请在1小时内激活账号',
                 content: dataUrl
             })
+
+            return this.body = {
+                ok: true
+            }
         } else {
             return this.body = {
                 ok: true,

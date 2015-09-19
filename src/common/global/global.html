@@ -2,93 +2,94 @@
 <html lang="zh-cn">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible"
-    content="IE=edge">
+      content="IE=edge">
 <meta name="viewport"
-    content="width=device-width, initial-scale=1">
+      content="width=device-width, initial-scale=1">
 <meta name="format-detection"
-    content="telephone=no">
+      content="telephone=no">
 
 <meta name="keywords"
-    content="">
+      content="">
 <meta name="description"
-    content="">
+      content="">
 <meta property="qc:admins"
-    content="53260245576773571556375" />
+      content="53260245576773571556375"/>
 
 <link href="image/favicon.ico"
-    rel="shortcut icon">
+      rel="shortcut icon">
 <link href="../../plugin/fontAwesome/css/font-awesome.css"
-    rel="stylesheet">
+      rel="stylesheet">
 <link href="../../plugin/bootstrap/bootstrap.css"
-    rel="stylesheet">
+      rel="stylesheet">
 <link href="global.less"
-    rel="stylesheet">
+      rel="stylesheet">
 
 <title>我酷</title>
 
 <body ms-controller="global">
 
-    <nav class="navbar navbar-dark bg-inverse b-r-0">
-        <a class="navbar-brand"
-            href="/"
-            router>我酷</a>
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link"
-                    href="/app"
-                    router
-                    ms-class="active:menu.current == 'app'">浏览</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                    ms-class="active:menu.current == 'doc'">文档</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                    ms-class="active:menu.current == 'blog'">博客</a>
-            </li>
-        </ul>
+<nav class="navbar navbar-dark bg-inverse b-r-0">
+    <a class="navbar-brand"
+       href="/"
+       router>我酷</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="/app"
+               router
+               ms-class="active:menu.current == 'app'">浏览</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               ms-class="active:menu.current == 'doc'">文档</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               ms-class="active:menu.current == 'blog'">博客</a>
+        </li>
+    </ul>
 
-        <ul class="nav navbar-nav pull-right">
-            <li class="nav-item">
-                <a class="nav-link"
-                    ms-class="active:menu.current == 'login'"
-                    ms-if="!my.isLogin"
-                    href="/auth/login"
-                    router>登录</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link"
-                    type="button"
-                    data-toggle="dropdown">
-                    用户
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item"
-                        href="#">信息</a>
-                    <a class="dropdown-item"
-                        href="#">退出</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
+    <ul class="nav navbar-nav pull-right">
+        <li class="nav-item">
+            <a class="nav-link"
+               ms-class="active:menu.current == 'login'"
+               ms-if="!my.isLogin"
+               href="/auth/login"
+               router>登录</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link"
+               type="button"
+               data-toggle="dropdown">
+                用户
+            </a>
 
-    <!-- 页中部位置，引入子元素模版 -->
-    <div id="doc">
-        <div ms-view="container"></div>
-        <div ms-if="footer.show"
-            id="push"></div>
-    </div>
+            <div class="dropdown-menu">
+                <a class="dropdown-item"
+                   href="#">信息</a>
+                <a class="dropdown-item"
+                   href="#">退出</a>
+            </div>
+        </li>
+    </ul>
+</nav>
 
-    <!-- 页面底部 -->
+<!-- 页中部位置，引入子元素模版 -->
+<div id="doc">
+    <div ms-view="container"></div>
     <div ms-if="footer.show"
-        id="footer">
-        footer
-    </div>
+         id="push"></div>
+</div>
+
+<!-- 页面底部 -->
+<div ms-if="footer.show"
+     id="footer">
+    footer
+</div>
 </body>
 
 <script src="../../plugin/jquery/jquery.js"></script>
 <script src="../../plugin/tether.js"></script>
 <script src="../../plugin/bootstrap/bootstrap.js"></script>
 <script src="../../plugin/avalon/avalon.js"
-    data-main="/static/common/global/global.js"></script>
+        data-main="/static/common/global/global.js"></script>

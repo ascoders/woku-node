@@ -24,3 +24,33 @@ exports.nickname = {
         }
     }
 }
+
+// 获取当前登录用户
+exports.current = {
+    get: function *() {
+        if (!this.session.uid) {
+            return this.body = {
+                ok: false,
+                data: '未登录'
+            }
+        }
+
+        var result = yield user.findOne({
+            where: {
+                id: this.session.uid
+            }
+        })
+
+        if (!result.ok) {
+            return this.body = {
+                ok: false,
+                data: '用户不存在'
+            }
+        }
+
+        return this.body = {
+            ok: true,
+            data: result.data
+        }
+    }
+}

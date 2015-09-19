@@ -57,9 +57,17 @@ describe("controllers", function () {
                 res.body.ok.should.equal(false)
             })
 
-            it("登录", function* () {
+            it("用户名登录", function* () {
                 var res = yield agent.get(host + '/auth/login').query({
                     account: 'test',
+                    password: 'abcdef'
+                })
+                res.body.ok.should.equal(true)
+            })
+
+            it("邮箱登录", function* () {
+                var res = yield agent.get(host + '/auth/login').query({
+                    account: '576625322@qq.com',
                     password: 'abcdef'
                 })
                 res.body.ok.should.equal(true)

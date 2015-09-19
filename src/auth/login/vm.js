@@ -1,52 +1,52 @@
 var vm = avalon.define({
-	account: '',
-	password: '',
-	frontia: function (val) { // 点击第三方登陆
-		require(['frontia'], function (frontia) {
-			// API key 从应用信息页面获取
-			var AK = 'RqeMWD9G1m8agmxfj6ngCKRG';
-			// 在应用管理页面下的 社会化服务 - 基础设置中设置该地址
-			var redirect_url = 'http://www.wokugame.com/login/oauth'
+    form: {
+        // 账户
+        account: '',
+        // 密码
+        password: '',
+        // 记住密码
+        remind: true
+    },
 
-			// 初始化 frontia
-			frontia.init(AK)
+    submit: function () { //点击登陆按钮
+        require(['validator'], function (validator) {
+            var validate = wk.validate($('#j-form'), {
+                account: {
+                    ok: validator.isLength(vm.form.account, 2, 30),
+                    msg: '帐号长度为2-30'
+                },
+                password: {
+                    ok: validator.isLength(vm.form.password, 6, 30),
+                    msg: '密码长度为6-30'
+                }
+            })
 
-			// 初始化登录的配置
-			var options = {
-				response_type: 'token',
-				media_type: val,
-				redirect_uri: redirect_url,
-				client_type: 'web'
-			}
+            if (!validate.ok) {
+                return
+            }
 
-			// 登录
-			frontia.social.login(options)
-		});
-	},
-	submit: function () { //点击登陆按钮
-		if (vm.account === '') {
-			return wk.notice('账号不能为空', 'red')
-		}
-		if (vm.password === '') {
-			return wk.notice('密码不能为空', 'red')
-		}
+            $.ajax('/api/auth/login', {
+                data: vm.form,
+                success: function (data) {
+                    if (!data.ok) {
+                        switch (data.data) {
+                            case '用户不存在':
+                                validate.error('account', data.data)
+                                break
+                            case '密码错误':
+                                validate.error('password', data.data)
+                                break
+                        }
+                        return
+                    }
 
-		wk.get({
-			url: '/api/users/authentication',
-			data: {
-				account: vm.account,
-				password: vm.password
-			},
-			success: function (data) {
-				avalon.vmodels.global.my.setInfo(data)
+                    avalon.vmodels.global.my.setInfo(data.data)
 
-				// 跳回上个页面
-				var lastUrl = avalon.router.getLastPath()
-				if (lastUrl === 'login') {
-					lastUrl = '/'
-				}
-				avalon.router.navigate(lastUrl)
-			}
-		})
-	}
+                    // 跳回上个页面
+                    wk.jumpLastLocation()
+                }
+            })
+        })
+
+    }
 })
