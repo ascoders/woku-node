@@ -6,7 +6,6 @@ wk.setUser = function (val) {
     val.portrait = wk.userImage(val.portrait)
     global.my.info = val
     global.my.isLogin = true
-
     // 信息获取完毕
     global.$myDeferred.resolve()
 }
@@ -50,9 +49,12 @@ wk.ajax = function (method, opts) {
     var defaultOpts = {
         url: '',
         data: '',
-        done: function () {},
-        fail: function () {},
-        always: function () {}
+        done: function () {
+        },
+        fail: function () {
+        },
+        always: function () {
+        }
     }
     opts = $.extend(defaultOpts, opts)
 
@@ -60,14 +62,14 @@ wk.ajax = function (method, opts) {
         var csrf = cookie.get('_csrf') || ''
 
         return $.ajax({
-                url: opts.url,
-                type: method,
-                traditional: true, // 便于传数组
-                data: opts.data,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRFToken', csrf);
-                },
-            })
+            url: opts.url,
+            type: method,
+            traditional: true, // 便于传数组
+            data: opts.data,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrf);
+            },
+        })
             .done(function (data, status, xhr) {
                 opts.done(data)
             })

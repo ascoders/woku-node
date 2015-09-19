@@ -8,11 +8,23 @@ ctrl.$onEnter = function (param, rs, rj) {
             return wk.jumpLastLocation()
         }
     })
+
+    // 如果有type参数
+    switch (mmState.query.type) {
+    case 'email':
+        $.ajax('/api/auth/register', {
+            type: 'post',
+            data: mmState.query,
+            success: function (data) {
+                wk.setUser(data)
+            }
+        })
+        break
+    }
 }
 
 ctrl.$onRendered = function () {
     // 用户名获取焦点
     $('input[name="nickname"]').focus()
-
     $('[data-toggle="tooltip"]').tooltip()
 }

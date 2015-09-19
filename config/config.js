@@ -1,10 +1,24 @@
+// 敏感token
 var secret = require('../secret')
 
-// 网站名称
-exports.appName = 'woku'
+// 是否在测试状态
+var test = true
 
-// 监听端口
-exports.port = 8080
+var myArgs = process.argv.slice(2)
+myArgs.forEach(function (item) {
+    switch (item) {
+    case 'release': // 发布模式
+        test = false
+        break
+    }
+})
+
+// 网站
+exports.web = {
+    domain: 'http://www.wokugame.com',
+    name: 'woku',
+    port: 8080
+}
 
 // Cookie 签名密钥
 exports.appKeys = {
@@ -23,7 +37,7 @@ exports.templatePath = 'static/common/global/global.html'
 
 // 数据库
 exports.db = {
-    name: process.env.NODE_APP_DEV ? 'woku_test' : 'woku',
+    name: test ? 'woku_test' : 'woku',
     user: 'root',
     password: '',
     host: 'localhost',
@@ -49,4 +63,4 @@ exports.redis = {
 exports.debug = true
 
 // 是否在测试环境
-exports.test = process.env.NODE_APP_DEV ? true : false
+exports.test = test

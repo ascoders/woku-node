@@ -1,5 +1,5 @@
 var conf = require('../../../config/config')
-var host = 'http://localhost:' + conf.port + '/api'
+var host = 'http://localhost:' + conf.web.port + '/api'
 
 var agent = require('superagent').agent()
 var userModel = require('../../../models/user/model')

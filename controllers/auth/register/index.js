@@ -26,15 +26,17 @@ exports.index = {
         var dataUrl = sign.create(this.session.registerToken, 60 * 60, {
             nickname: this.query.nickname,
             email: this.query.email,
-            password: this.query.password
+            password: this.query.password,
+            type: 'email'
         })
 
         if (!conf.test) {
             email.send({
-                to: this.query.email,
-                title: this.query.nickname + '! 请在1小时内激活账号',
-                content: dataUrl
-            })
+                    to: this.query.email,
+                    title: this.query.nickname + '! 请在1小时内激活账号',
+                    content: '<a href="' + conf.web.domain + '/auth/register' + dataUrl + '">点击激活</a>'
+                }
+            )
 
             return this.body = {
                 ok: true
@@ -55,15 +57,23 @@ exports.index = {
 
         var check = sign.check(this.session.registerToken, body)
 
-        if (check.ok) {
-            return this.body = {
-                ok: true
-            }
-        } else {
+        if (!check.ok) {
             return this.body = {
                 ok: false,
                 data: check.data
             }
         }
+
+        var result = yield user.add({
+            nickname: body.nickname,
+            password: body.password,
+            email: body.email
+        })
+
+        if (result.ok) {
+            this.session.uid = result.data.id
+        }
+
+        return this.body = result
     }
 }

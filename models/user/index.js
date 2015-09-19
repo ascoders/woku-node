@@ -1,6 +1,7 @@
 var model = require('./model')
 var validator = require('validator')
 var crypto = require('crypto')
+var rand = require('../../lib/rand')
 
 // 增
 exports.add = function (info) {
@@ -52,6 +53,10 @@ exports.add = function (info) {
 
             // 密码md5
             info.password = crypto.createHash('md5').update(info.password + info.token).digest('hex')
+
+            // 随机生成头像
+            var rangeNumber = rand.range(0, 8)
+            info.portrait = rangeNumber.toString()
 
             // 插入
             model.create(info).then(function (result) {

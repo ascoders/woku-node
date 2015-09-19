@@ -16,13 +16,16 @@ var log4js = require('log4js')
 var conf = require('./config/config')
 
 // koa配置
-app.name = conf.appName
+app.name = conf.web.name
 app.keys = [conf.appKeys.key, conf.appKeys.value]
 
 // 设置session
 var session = require('koa-generic-session')
 app.use(session({
-    store: redisStore()
+    store: redisStore({
+        host: conf.redis.host,
+        port: conf.redis.port
+    })
 }))
 
 // 设置静态资源缓存
@@ -70,4 +73,4 @@ app.use(function *() {
     this.body = templateHtml
 })
 
-module.exports = app.listen(conf.port)
+module.exports = app.listen(conf.web.port)

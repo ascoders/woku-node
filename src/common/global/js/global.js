@@ -10,7 +10,7 @@ var global = avalon.define({
         isLogin: false,
 
         //退出登陆
-        signout: function () {
+        logout: function () {
             wk.delete({
                 url: '/api/users/authentication',
                 data: {

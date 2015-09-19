@@ -49,31 +49,21 @@ then
   exit
 fi
 
-if [[ $1 == "test" ]]
-then
+pm2 delete app.js
+pm2 start app.js
 
-    export NODE_APP_DEV=true
+echo '[run cover& created coverage.html]'
+mocha -R travis-cov "test/**/*.js"
+mocha -R html-cov > coverage.html "test/**/*.js"
 
-    pm2 delete app.js
-    pm2 start app.js
+echo '[run test]'
+mocha "test/**/*.js" -s 10
 
-    echo '[run cover& created coverage.html]'
-    mocha -R travis-cov "test/**/*.js"
-    mocha -R html-cov > coverage.html "test/**/*.js"
+pm2 delete app.js
 
-    echo '[run test]'
-    mocha "test/**/*.js" -s 10
-
-    pm2 delete app.js
-
-  exit
-fi
-
-export NODE_APP_DEV=false
 
 echo '[run pm2]'
-pm2 delete app.js
-pm2 start app.js --watch --ignore-watch="src static test node_modules" --merge-logs -f
+pm2 start --watch --ignore-watch="src static test node_modules" --merge-logs -i 0 -f app.js -- release
 
 echo '[run fis3 dev mode..]'
 fis3 release -d static -r src -f fis-conf.js -w -l

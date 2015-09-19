@@ -143,26 +143,6 @@ describe('models/user', function () {
             })
             result.ok.should.equal(false)
         })
-
-        it('头像地址长度大于1', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcdef',
-                email: '576625322@qq.com',
-                portrait: ''
-            })
-            result.ok.should.equal(false)
-        })
-
-        it('头像地址长度小于30', function* () {
-            var result = yield user.add({
-                nickname: 'test',
-                password: 'abcdef',
-                email: '576625322@qq.com',
-                portrait: 'abcdeabcdeabcdeabcdeabcdeabcdea'
-            })
-            result.ok.should.equal(false)
-        })
     })
 
     describe('删除', function () {

@@ -30,17 +30,17 @@ var vm = avalon.define({
                 success: function (data) {
                     if (!data.ok) {
                         switch (data.data) {
-                            case '用户不存在':
-                                validate.error('account', data.data)
-                                break
-                            case '密码错误':
-                                validate.error('password', data.data)
-                                break
+                        case '用户不存在':
+                            validate.error('account', data.data)
+                            break
+                        case '密码错误':
+                            validate.error('password', data.data)
+                            break
                         }
                         return
                     }
 
-                    avalon.vmodels.global.my.setInfo(data.data)
+                    wk.setUser(data.data)
 
                     // 跳回上个页面
                     wk.jumpLastLocation()
