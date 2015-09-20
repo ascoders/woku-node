@@ -11,7 +11,7 @@ describe('models/user', function () {
     })
 
     afterEach(function* () {
-        var result = yield user.delete({
+        var result = yield user.del({
             where: {
                 nickname: {
                     $in: ['test', 'test1', 'test2']
@@ -78,7 +78,7 @@ describe('models/user', function () {
                 email: '576625322@qq.com'
             })
 
-            var result = yield user.add({
+            result = yield user.add({
                 nickname: 'test',
                 password: 'ccc',
                 email: 'bbb@qq.com'
@@ -127,7 +127,7 @@ describe('models/user', function () {
                 email: 'aaa1@qq.com'
             })
 
-            var result = yield user.add({
+            result = yield user.add({
                 nickname: 'test2',
                 password: 'ccc',
                 email: 'aaa1@qq.com'
@@ -156,7 +156,7 @@ describe('models/user', function () {
         })
 
         it('删除成功', function* () {
-            var result = yield user.delete({
+            var result = yield user.del({
                 where: {
                     nickname: 'test'
                 }
@@ -176,7 +176,7 @@ describe('models/user', function () {
         })
 
         afterEach(function* () {
-            var result = yield user.delete({
+            var result = yield user.del({
                 where: {
                     nickname: 'test'
                 }
@@ -205,14 +205,14 @@ describe('models/user', function () {
             })
             result.ok.should.equal(true)
 
-            var result = yield user.add({
+            result = yield user.add({
                 nickname: 'test1',
                 password: 'abcdef',
                 email: '5766253221@qq.com'
             })
             result.ok.should.equal(true)
 
-            var result = yield user.add({
+            result = yield user.add({
                 nickname: 'test2',
                 password: 'abcdef',
                 email: '5766253223@qq.com'
@@ -221,7 +221,7 @@ describe('models/user', function () {
         })
 
         afterEach(function* () {
-            var result = yield user.delete({
+            var result = yield user.del({
                 where: {
                     nickname: {
                         $in: ['test', 'test1', 'test2']

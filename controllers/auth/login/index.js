@@ -73,7 +73,7 @@ exports.index = {
 
 // 登出
 exports.logout = {
-    get: function* () {
+    del: function* () {
         if (validator.isNull(this.session.uid)) {
             return this.body = {
                 ok: false,

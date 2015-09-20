@@ -80,7 +80,7 @@ controllers.forEach(function (path) {
                     router.patch(apiUrl, api[method])
                 }
                 break
-            case 'delete':
+            case 'del':
                 if (typeof api[method] === 'object') {
                     api[method].unshift(apiUrl)
                     router.delete.apply(router, api[method])

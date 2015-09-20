@@ -75,7 +75,7 @@ describe("controllers", function () {
             })
 
             it("登出", function* () {
-                var res = yield agent.get(host + '/auth/login/logout')
+                var res = yield agent.del(host + '/auth/login/logout')
                 res.body.ok.should.equal(true)
             })
         })

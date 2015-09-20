@@ -52,17 +52,16 @@ fi
 pm2 delete app.js
 pm2 start app.js
 
+testpath=$(find controllers/ models/ lib/ -name "test.js")
+
 echo '[run cover& created coverage.html]'
-#mocha -R travis-cov "test/**/*.js"
-#mocha -R html-cov > coverage.html "test/**/*.js"
+mocha -R travis-cov $testpath
+mocha -R html-cov > coverage.html $testpath
 
 echo '[run test]'
-mocha "controllers/**/test.js" -s 10 --check-leaks --es_staging
-mocha "models/**/test.js" -s 10 --check-leaks --es_staging
-mocha "lib/**/test.js" -s 10 --check-leaks --es_staging
+mocha $testpath -s 10 --check-leaks --es_staging
 
 pm2 delete app.js
-
 
 echo '[run pm2]'
 pm2 start --watch --ignore-watch="src static test node_modules" --merge-logs -i 0 -f app.js -- release

@@ -54,3 +54,23 @@ exports.current = {
         }
     }
 }
+
+var aaa = function () {
+    return function (done) {
+        var b = bbb()
+        done(null, 'aaa' + b)
+    }
+}
+
+var bbb = function () {
+    return function (done) {
+        done(null, 'bbb')
+    }
+}
+
+exports.test = {
+    get: function*() {
+        var result = yield aaa()
+        return this.body = 'result:' + result
+    }
+}

@@ -11,12 +11,9 @@ var global = avalon.define({
 
         //退出登陆
         logout: function () {
-            wk.delete({
-                url: '/api/users/authentication',
-                data: {
-                    id: global.my.id
-                },
-                done: function (data) {
+            $.ajax('/api/auth/login/logout', {
+                type: 'delete',
+                success: function (data) {
                     global.my.isLogin = false
                     global.my.info = {}
 

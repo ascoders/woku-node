@@ -28,53 +28,57 @@
 
 <body ms-controller="global">
 
-<nav class="navbar navbar-dark bg-inverse b-r-0">
-    <a class="navbar-brand"
-       href="/"
-       router>我酷</a>
-    <ul class="nav navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link"
-               href="/app"
-               router
-               ms-class="active:menu.current == 'app'">浏览</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               ms-class="active:menu.current == 'doc'">文档</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               ms-class="active:menu.current == 'blog'">博客</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-dark bg-violet b-r-0">
+    <div class="container">
+        <a class="navbar-brand"
+           href="/"
+           router>我酷</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="/app"
+                   router
+                   ms-class="active:menu.current == 'app'">浏览</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   ms-class="active:menu.current == 'doc'">文档</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   ms-class="active:menu.current == 'blog'">博客</a>
+            </li>
+        </ul>
 
-    <ul class="nav navbar-nav pull-right">
-        <li class="nav-item">
-            <a class="nav-link"
-               ms-class="active:menu.current == 'login'"
-               ms-if="!my.isLogin"
-               href="/auth/login"
-               router>登录</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link"
-               type="button"
-               data-toggle="dropdown">
-                <img class="portrait"
-                     ms-src="my.info.portrait">
-                {{my.info.nickname}}
-            </a>
+        <ul class="nav navbar-nav pull-right">
+            <li class="nav-item"
+                ms-if="!my.isLogin">
+                <a class="nav-link"
+                   ms-class="active:menu.current == 'login'"
+                   href="/auth/login"
+                   router>登录</a>
+            </li>
+            <li class="nav-item dropdown"
+                ms-if="my.isLogin">
+                <a class="nav-link"
+                   type="button"
+                   href="#"
+                   data-toggle="dropdown">
+                    <img class="portrait"
+                         ms-src="my.info.portrait">
+                    {{my.info.nickname}}
+                </a>
 
-            <div class="dropdown-menu">
-                <a class="dropdown-item"
-                   href="#">信息</a>
-                <a class="dropdown-item"
-                   ms-click="my.logout"
-                   href="#">退出</a>
-            </div>
-        </li>
-    </ul>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       href="#">信息</a>
+                    <a class="dropdown-item"
+                       ms-click="my.logout"
+                       href="#">退出</a>
+                </div>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <!-- 页中部位置，引入子元素模版 -->
