@@ -2,7 +2,7 @@ var user = require('../../../models/user')
 
 // 判断昵称是否存在
 exports.nickname = {
-    get: function * () {
+    get: function *() {
         // 查询昵称是否存在
         var result = yield user.findOne({
             where: {
@@ -52,25 +52,5 @@ exports.current = {
             ok: true,
             data: result.data
         }
-    }
-}
-
-var aaa = function () {
-    return function (done) {
-        var b = bbb()
-        done(null, 'aaa' + b)
-    }
-}
-
-var bbb = function () {
-    return function (done) {
-        done(null, 'bbb')
-    }
-}
-
-exports.test = {
-    get: function*() {
-        var result = yield aaa()
-        return this.body = 'result:' + result
     }
 }

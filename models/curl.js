@@ -19,19 +19,19 @@ module.exports = function (model) {
 
         // 删
         del: function (opts) {
-            return new Promise(function (resolve) {
+            return function (done) {
                 model.destroy(opts).then(function (result) {
-                    resolve({
+                    return done(null, {
                         ok: true,
                         data: result
                     })
                 }).catch(function (err) {
-                    resolve({
+                    return done(null, {
                         ok: false,
                         data: err
                     })
                 })
-            })
+            }
         },
 
         // 改

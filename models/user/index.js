@@ -76,8 +76,8 @@ exports.add = function (info) {
 }
 
 // 删
-exports.del = function (opts) {
-    return curl.del(opts)
+exports.del = function *(opts) {
+    return yield curl.del(opts)
 }
 
 // 改

@@ -55,11 +55,11 @@ pm2 start app.js
 testpath=$(find controllers/ models/ lib/ -name "test.js")
 
 echo '[run cover& created coverage.html]'
-mocha -R travis-cov $testpath
-mocha -R html-cov > coverage.html $testpath
+mocha --harmony -R travis-cov $testpath
+mocha --harmony -R html-cov > coverage.html $testpath
 
 echo '[run test]'
-mocha $testpath -s 10 --check-leaks --es_staging
+mocha --harmony $testpath -s 10 --check-leaks --es_staging
 
 pm2 delete app.js
 
